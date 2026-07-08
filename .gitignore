@@ -1,0 +1,30 @@
+# Binaries
+/bin/
+/mailauthlens
+
+# Build artifacts
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Dependency directories
+vendor/
+
+# Test output
+profile.out
+coverage.txt
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Go build cache
+/testcache/
