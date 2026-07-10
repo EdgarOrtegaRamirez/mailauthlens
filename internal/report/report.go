@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/EdgarOrtegaRamirez/mailauthlens/internal/dmarc"
 	"github.com/EdgarOrtegaRamirez/mailauthlens/internal/dkim"
 	"github.com/EdgarOrtegaRamirez/mailauthlens/internal/dkim2"
+	"github.com/EdgarOrtegaRamirez/mailauthlens/internal/dmarc"
 	"github.com/EdgarOrtegaRamirez/mailauthlens/internal/dnslookup"
 	"github.com/EdgarOrtegaRamirez/mailauthlens/internal/spf"
 )
@@ -30,24 +30,24 @@ type DomainReport struct {
 	Domain      string                 `json:"domain"`
 	Timestamp   string                 `json:"timestamp"`
 	SPF         *SPFReport             `json:"spf,omitempty"`
-	DKIM        *DKIMReport             `json:"dkim,omitempty"`
-	DKIM2       *DKIM2Report            `json:"dkim2,omitempty"`
-	DMARC       *DMARCReport            `json:"dmarc,omitempty"`
+	DKIM        *DKIMReport            `json:"dkim,omitempty"`
+	DKIM2       *DKIM2Report           `json:"dkim2,omitempty"`
+	DMARC       *DMARCReport           `json:"dmarc,omitempty"`
 	MXRecords   []string               `json:"mx_records,omitempty"`
-	MTASTS      string                  `json:"mta_sts,omitempty"`
-	TLSRPT      string                  `json:"tls_rpt,omitempty"`
+	MTASTS      string                 `json:"mta_sts,omitempty"`
+	TLSRPT      string                 `json:"tls_rpt,omitempty"`
 	DomainCheck *dnslookup.DomainCheck `json:"domain_check,omitempty"`
-	Score       int                     `json:"score"`
-	Grade       string                  `json:"grade"`
-	Issues       []string               `json:"issues,omitempty"`
+	Score       int                    `json:"score"`
+	Grade       string                 `json:"grade"`
+	Issues      []string               `json:"issues,omitempty"`
 }
 
 // SPFReport contains SPF analysis results.
 type SPFReport struct {
-	Record  string         `json:"record"`
-	Parsed  *spf.Record    `json:"parsed,omitempty"`
-	Issues  []string       `json:"issues,omitempty"`
-	Found   bool           `json:"found"`
+	Record string      `json:"record"`
+	Parsed *spf.Record `json:"parsed,omitempty"`
+	Issues []string    `json:"issues,omitempty"`
+	Found  bool        `json:"found"`
 }
 
 // DKIMReport contains DKIM analysis results for a specific selector.
@@ -61,19 +61,19 @@ type DKIMReport struct {
 
 // DKIM2Report contains DKIM2 analysis results.
 type DKIM2Report struct {
-	Selector string            `json:"selector"`
-	Record   string            `json:"record"`
-	Parsed   *dkim2.KeyRecord  `json:"parsed,omitempty"`
-	Issues   []string          `json:"issues,omitempty"`
-	Found    bool              `json:"found"`
+	Selector string           `json:"selector"`
+	Record   string           `json:"record"`
+	Parsed   *dkim2.KeyRecord `json:"parsed,omitempty"`
+	Issues   []string         `json:"issues,omitempty"`
+	Found    bool             `json:"found"`
 }
 
 // DMARCReport contains DMARC analysis results.
 type DMARCReport struct {
-	Record  string        `json:"record"`
-	Parsed  *dmarc.Record `json:"parsed,omitempty"`
-	Issues  []string      `json:"issues,omitempty"`
-	Found   bool          `json:"found"`
+	Record string        `json:"record"`
+	Parsed *dmarc.Record `json:"parsed,omitempty"`
+	Issues []string      `json:"issues,omitempty"`
+	Found  bool          `json:"found"`
 }
 
 // GenerateDomainReport creates a comprehensive report for a domain.

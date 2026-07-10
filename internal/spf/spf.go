@@ -189,11 +189,17 @@ func (r *Record) parseToken(token string) error {
 			if dslashIdx := strings.Index(cidrPart, "//"); dslashIdx >= 0 {
 				// Dual CIDR: /24//64
 				if dslashIdx > 1 {
-					fmt.Sscanf(cidrPart[:dslashIdx], "/%d", &m.PrefixLen)
+					if _, err := fmt.Sscanf(cidrPart[:dslashIdx], "/%d", &m.PrefixLen); err != nil {
+						return fmt.Errorf("invalid IPv4 CIDR prefix %q: %w", cidrPart[:dslashIdx], err)
+					}
 				}
-				fmt.Sscanf(cidrPart[dslashIdx+2:], "%d", &m.PrefixLen6)
+				if _, err := fmt.Sscanf(cidrPart[dslashIdx+2:], "%d", &m.PrefixLen6); err != nil {
+					return fmt.Errorf("invalid IPv6 CIDR prefix %q: %w", cidrPart[dslashIdx+2:], err)
+				}
 			} else {
-				fmt.Sscanf(cidrPart, "/%d", &m.PrefixLen)
+				if _, err := fmt.Sscanf(cidrPart, "/%d", &m.PrefixLen); err != nil {
+					return fmt.Errorf("invalid CIDR prefix %q: %w", cidrPart, err)
+				}
 			}
 		} else {
 			m.Type = rest
@@ -203,7 +209,9 @@ func (r *Record) parseToken(token string) error {
 	// For ip4/ip6, the value may contain CIDR — extract it
 	if m.Type == "ip4" || m.Type == "ip6" {
 		if slashIdx := strings.Index(m.Value, "/"); slashIdx >= 0 {
-			fmt.Sscanf(m.Value[slashIdx+1:], "%d", &m.PrefixLen)
+			if _, err := fmt.Sscanf(m.Value[slashIdx+1:], "%d", &m.PrefixLen); err != nil {
+				return fmt.Errorf("invalid CIDR prefix length %q: %w", m.Value[slashIdx+1:], err)
+			}
 			m.Value = m.Value[:slashIdx]
 		}
 	}

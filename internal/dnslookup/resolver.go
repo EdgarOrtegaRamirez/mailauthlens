@@ -228,18 +228,18 @@ func (r *Resolver) LookupMXRecordsForDomain(domain string) ([]string, error) {
 // CheckDomain checks all email authentication records for a domain.
 // Returns a comprehensive report of all findings.
 type DomainCheck struct {
-	Domain     string
-	SPFRecord  string
-	SPFError   string
+	Domain      string
+	SPFRecord   string
+	SPFError    string
 	DMARCRecord string
 	DMARCError  string
-	MXRecords  []string
-	MXError    string
-	MTASTS    string
+	MXRecords   []string
+	MXError     string
+	MTASTS      string
 	MTASTSError string
-	TLSRPT    string
+	TLSRPT      string
 	TLSRPTError string
-	HasDNSSEC bool
+	HasDNSSEC   bool
 }
 
 // CheckDomain performs a comprehensive check of all email authentication
@@ -293,7 +293,7 @@ type txtCache struct {
 }
 
 type txtCacheEntry struct {
-	records  []string
+	records   []string
 	expiresAt time.Time
 }
 

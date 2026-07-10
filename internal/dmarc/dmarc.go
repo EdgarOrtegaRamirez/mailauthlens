@@ -26,7 +26,7 @@ type AlignmentMode string
 
 const (
 	AlignmentRelaxed AlignmentMode = "r" // relaxed
-	AlignmentStrict AlignmentMode = "s" // strict
+	AlignmentStrict  AlignmentMode = "s" // strict
 )
 
 // PSDFlag represents the psd= tag value (Public Suffix Domain flag).
@@ -100,14 +100,14 @@ func Parse(text string) (*Record, error) {
 	}
 
 	rec := &Record{
-		Version:            "DMARC1",
-		Policy:             PolicyNone,
-		SubdomainPolicy:    PolicyNone,
-		AlignmentDKIM:      AlignmentRelaxed,
-		AlignmentSPF:       AlignmentRelaxed,
-		PSD:                PSDUnknown,
-		ReportingInterval:  86400,
-		Raw:                text,
+		Version:           "DMARC1",
+		Policy:            PolicyNone,
+		SubdomainPolicy:   PolicyNone,
+		AlignmentDKIM:     AlignmentRelaxed,
+		AlignmentSPF:      AlignmentRelaxed,
+		PSD:               PSDUnknown,
+		ReportingInterval: 86400,
+		Raw:               text,
 	}
 
 	// Split into tokens (whitespace-separated).

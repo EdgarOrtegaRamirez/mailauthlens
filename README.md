@@ -169,7 +169,7 @@ mailauthlens/
 │   ├── dmarc/dmarc.go          # DMARC parsing (RFC 9989)
 │   ├── dnslookup/resolver.go   # DNS resolution utilities
 │   └── report/report.go        # Report generation (text/JSON/markdown)
-└── tests/                      # Integration tests
+└── go.mod                      # Go module definition
 ```
 
 ## DKIM2 Highlights

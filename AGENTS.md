@@ -14,7 +14,7 @@ mailauthlens/
 │   ├── dmarc/dmarc.go          # DMARC parsing (RFC 9989)
 │   ├── dnslookup/resolver.go   # DNS resolution utilities
 │   └── report/report.go        # Report generation
-├── tests/                      # Integration tests
+├── *_test.go                   # Tests (co-located with source)
 └── go.mod                      # Go module definition
 ```
 

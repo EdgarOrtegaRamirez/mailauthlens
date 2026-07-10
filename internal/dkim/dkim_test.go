@@ -213,13 +213,13 @@ func TestGenerateKeySelector(t *testing.T) {
 
 func TestValidate(t *testing.T) {
 	sig := &Signature{
-		Version:    "1",
-		Algorithm:  "rsa-sha1",
-		Domain:     "example.com",
-		Selector:   "s",
-		Headers:    "from:subject",
-		SignedHeaders: []string{"from", "subject"},
-		BodyHash:   "abc",
+		Version:        "1",
+		Algorithm:      "rsa-sha1",
+		Domain:         "example.com",
+		Selector:       "s",
+		Headers:        "from:subject",
+		SignedHeaders:  []string{"from", "subject"},
+		BodyHash:       "abc",
 		SignatureValue: "xyz",
 	}
 	issues := Validate(sig, nil)
@@ -236,13 +236,13 @@ func TestValidate(t *testing.T) {
 
 func TestValidateFromSigned(t *testing.T) {
 	sig := &Signature{
-		Version:       "1",
-		Algorithm:     "rsa-sha256",
-		Domain:        "example.com",
-		Selector:      "s",
-		Headers:       "from:subject:date",
-		SignedHeaders: []string{"from", "subject", "date"},
-		BodyHash:      "abc",
+		Version:        "1",
+		Algorithm:      "rsa-sha256",
+		Domain:         "example.com",
+		Selector:       "s",
+		Headers:        "from:subject:date",
+		SignedHeaders:  []string{"from", "subject", "date"},
+		BodyHash:       "abc",
 		SignatureValue: "xyz",
 	}
 	issues := Validate(sig, nil)

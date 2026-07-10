@@ -89,8 +89,8 @@ func TestParseBasic(t *testing.T) {
 
 func TestParseQualifiers(t *testing.T) {
 	tests := []struct {
-		input    string
-		qual     rune
+		input string
+		qual  rune
 	}{
 		{"v=spf1 +all", '+'},
 		{"v=spf1 -all", '-'},

@@ -120,7 +120,9 @@ func parseOptions(args []string) (options, []string) {
 			}
 		case "--timeout":
 			if i+1 < len(args) {
-				fmt.Sscanf(args[i+1], "%d", &opts.timeout)
+				if _, err := fmt.Sscanf(args[i+1], "%d", &opts.timeout); err != nil {
+					fmt.Fprintf(os.Stderr, "Warning: invalid timeout value %q, using default\n", args[i+1])
+				}
 				i++
 			}
 		case "--selector":
@@ -203,11 +205,11 @@ func cmdSPF(args []string) {
 	switch opts.format {
 	case "json":
 		printJSON(map[string]interface{}{
-			"domain":  domain,
-			"record":  rec.Raw,
+			"domain":     domain,
+			"record":     rec.Raw,
 			"mechanisms": rec.Mechanisms,
-			"issues":  issues,
-			"redirect": rec.Redirect,
+			"issues":     issues,
+			"redirect":   rec.Redirect,
 		})
 	case "markdown":
 		fmt.Printf("# SPF Report: %s\n\n", domain)
@@ -398,17 +400,17 @@ func cmdDMARC(args []string) {
 	switch opts.format {
 	case "json":
 		printJSON(map[string]interface{}{
-			"domain":         domain,
-			"record":         record,
-			"policy":         rec.Policy,
+			"domain":          domain,
+			"record":          record,
+			"policy":          rec.Policy,
 			"subdomainPolicy": rec.SubdomainPolicy,
-			"adkim":          rec.AlignmentDKIM,
-			"aspf":           rec.AlignmentSPF,
-			"psd":            rec.PSD,
-			"np":             rec.NPDomainPolicy,
-			"rua":            rec.AggregateReportURIs,
-			"ruf":            rec.FailureReportURIs,
-			"issues":         issues,
+			"adkim":           rec.AlignmentDKIM,
+			"aspf":            rec.AlignmentSPF,
+			"psd":             rec.PSD,
+			"np":              rec.NPDomainPolicy,
+			"rua":             rec.AggregateReportURIs,
+			"ruf":             rec.FailureReportURIs,
+			"issues":          issues,
 		})
 	case "markdown":
 		fmt.Printf("# DMARC Report: %s (RFC 9989)\n\n", domain)
